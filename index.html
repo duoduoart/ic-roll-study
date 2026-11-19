@@ -59,6 +59,8 @@ h3{font-size:17px;font-weight:650}
 .select-control{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:13px}
 .select-control select{border:1px solid #ced9cd;border-radius:8px;padding:8px 13px;background:var(--paper);color:var(--ink);min-height:45px}
 [hidden]{display:none!important}
+.basis-guide{display:grid;gap:3px;margin:0 0 12px;font-size:13px;color:var(--muted)}
+.basis-guide strong{color:var(--ink);font-weight:650;margin-right:.35em}
 .scope-note{font-size:13px;color:var(--muted);margin:0 0 15px}
 .metric-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:12px}
 .metric-card{position:relative;padding:15px 18px;background:var(--paper);border:1px solid var(--line);border-radius:11px;min-width:0}
@@ -230,9 +232,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 1
           <button type="button" data-period="five" aria-pressed="false">近 5 年</button>
           <button type="button" data-period="three" aria-pressed="false">近 3 年</button>
         </div>
-        <div class="control-set" id="basis-controls" role="group" aria-label="比较口径">
-          <button type="button" data-basis="fair" aria-pressed="true">人民币全收益</button>
-          <button type="button" data-basis="original" aria-pressed="false">原帖价格口径</button>
+        <div class="control-set" id="basis-controls" role="group" aria-label="指数比较口径" aria-describedby="basis-guide">
+          <button type="button" data-basis="fair" aria-pressed="true">统一人民币 · 含股息</button>
+          <button type="button" data-basis="original" aria-pressed="false">原帖口径 · 只看价格</button>
         </div>
       </div>
       <label class="select-control" id="nas-field">纳指基准
@@ -241,6 +243,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 1
           <option value="ndxTR">纳斯达克 100</option>
         </select>
       </label>
+    </div>
+    <div class="basis-guide" id="basis-guide">
+      <p><strong>统一人民币 · 含股息</strong> 中证 500 和纳指都把股息算作再投资，纳指再按汇率折成人民币。</p>
+      <p><strong>原帖口径 · 只看价格</strong> 中证 500 看人民币价格，纳斯达克综合看美元价格，均不计股息。</p>
     </div>
     <p class="scope-note" id="scope-note" aria-live="polite"></p>
     <div class="metric-cards" id="cards"></div>
@@ -460,8 +466,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 1
         </div>
         <div>
           <h3>指数、分红与汇率</h3>
-          <p>人民币全收益模式用中证 500 全收益指数和纳斯达克全收益指数，含股息再投资。以中国交易日为共同估值日，期现各取其收盘价，美股采用当时已知的最近美国收盘价，乘当日 USD/CNY 中间价。未扣基金费率、跟踪差异、股息税和换汇成本。</p>
-          <p>原帖价格模式用中证 500 人民币价格指数和纳斯达克综合美元价格指数，分别按两地当地日期。图上休市日沿用前值，统计按各自估值日。纳指数据由 Nasdaq, Inc. 提供，经圣路易斯联储 FRED 分发。<a href="https://www.csindex.com.cn/">中证指数</a> · <a href="https://fred.stlouisfed.org/series/NASDAQCOM">纳指综合</a> · <a href="https://fred.stlouisfed.org/series/NASDAQXCMP">纳指综合全收益</a> · <a href="https://fred.stlouisfed.org/series/NASDAQXNDX">纳指 100 全收益</a> · <a href="https://fred.stlouisfed.org/legal/">FRED 数据条款</a> · <a href="https://www.safe.gov.cn/safe/2020/1218/17833.html">外管局历史中间价</a> · <a href="https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do?startDate=2025-12-15&amp;endDate=2026-11-18&amp;queryYN=true">2026 中间价</a></p>
+          <p>「统一人民币 · 含股息」用中证 500 和纳斯达克的全收益指数，含股息再投资。以中国交易日为共同估值日，期现各取其收盘价，纳指采用中国收盘时已知的最近美国收盘价，乘当日 USD/CNY 中间价。未扣基金费率、跟踪差异、股息税和换汇成本。</p>
+          <p>「原帖口径 · 只看价格」用中证 500 人民币价格指数和纳斯达克综合美元价格指数，两者均不计股息，分别按两地当地日期。图上休市日沿用前值，统计按各自估值日。纳指数据由 Nasdaq, Inc. 提供，经圣路易斯联储 FRED 分发。<a href="https://www.csindex.com.cn/">中证指数</a> · <a href="https://fred.stlouisfed.org/series/NASDAQCOM">纳指综合</a> · <a href="https://fred.stlouisfed.org/series/NASDAQXCMP">纳指综合全收益</a> · <a href="https://fred.stlouisfed.org/series/NASDAQXNDX">纳指 100 全收益</a> · <a href="https://fred.stlouisfed.org/legal/">FRED 数据条款</a> · <a href="https://www.safe.gov.cn/safe/2020/1218/17833.html">外管局历史中间价</a> · <a href="https://www.safe.gov.cn/AppStructured/hlw/RMBQuery.do?startDate=2025-12-15&amp;endDate=2026-11-18&amp;queryYN=true">2026 中间价</a></p>
         </div>
         <div>
           <h3>收益与风险指标</h3>
@@ -527,12 +533,12 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 1
   }
 
   function scopeNote() {
-    const { period, fair, keys } = current;
+    const { period, fair } = current;
     const span = period.start + " 至 " + period.end;
     const shift = period.requestedStart === period.start ? "" : " · 起点顺延至首个交易日";
     const usd = fair
       ? "纳指采用中国收盘时已知的美股估值（美东 " + period.actualUSStart + " 至 " + period.actualUSEnd + "）"
-      : "中证 500 以人民币、" + data.names[keys[2]] + "以美元计价（美东 " + period.originalUSEnd + " 为末笔）";
+      : "纳指最后一笔为美东 " + period.originalUSEnd + " 收盘";
     el("scope-note").textContent = span + " · 各以初始净值 1 起算" + shift + "。 " + usd + "。";
   }
 
@@ -859,7 +865,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 1
       drawdown: "回撤表示当前净值离此前最高值有多远。例如净值从最高的 1.50 跌到 1.20，回撤就是 −20%。",
       rolling: "每个点都向前看 365 天，计算这段时间的收益。例如净值从 1.00 到 1.12，就是 +12%。" +
         "往回遇到休市，就用当日以前最近的估值。开头不足一年的部分没有数据。" +
-        (current.fair ? "" : "原帖价格口径下，各市场按自己的估值日计算，图上休市日沿用上次结果。"),
+        (current.fair ? "" : "原帖口径下，各市场按自己的估值日计算，图上休市日沿用上次结果。"),
       contribution: "指数涨跌、基差损益、现金利息都除以起始本金，三项相加就是这条 IC 累计收益。指数涨跌按实际持有手数计算。",
     };
     el("chart-note").textContent = notes[state.chart];
