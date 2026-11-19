@@ -7,14 +7,15 @@
 <title>滚动 IC 与两大指数</title>
 <style>
 :root {
-  --bg:#f4f4ee;
-  --paper:#fffef9;
+  --bg:#f5f5ef;
+  --paper:#fffefb;
   --ink:#172b26;
-  --muted:#52625c;
-  --line:#dde2d8;
-  --forest:#12342c;
-  --green:#166954;
-  --pale:#e7efe7;
+  --muted:#4e625a;
+  --line:#dce3d9;
+  --forest:#143831;
+  --green:#176952;
+  --pale:#edf2e9;
+  --soft:#f0f3ec;
   --ic:#aa5623;
   --csi:#14766c;
   --nas:#6552a5;
@@ -30,53 +31,56 @@ a{color:var(--green);text-underline-offset:.22em}
 a:hover{text-decoration-thickness:2px}
 button,select{font:inherit}
 button{cursor:pointer}
-:focus-visible{outline:2px solid #16846a;outline-offset:3px}
-.wrap{width:min(1152px, calc(100% - 64px));margin-inline:auto}
-.hero{background:var(--forest);color:#f6f5e9}
-.mast{display:flex;justify-content:space-between;align-items:center;gap:15px;padding-block:15px;border-bottom:1px solid #426257}
-.mast strong{font-weight:600;color:#e1eade}
-.mast nav{display:flex;gap:25px}
-.mast a{color:#e1eade;text-decoration:none;font-size:13px}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.wrap{width:min(1240px, calc(100% - 64px));margin-inline:auto}
+.hero{background:var(--paper);border-bottom:1px solid var(--line)}
+.hero-nav{background:var(--forest)}
+.hero-nav :focus-visible{outline-color:#d8ead8}
+.mast{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:42px}
+.mast strong{font-size:13px;font-weight:650;letter-spacing:.045em;color:#edf4eb}
+.mast nav{display:flex;gap:20px;align-items:center}
+.mast a{color:#edf4eb;text-decoration:none;font-size:13px;padding-block:8px}
 .mast a:hover{text-decoration:underline}
-.hero-body{padding:44px 0 43px}
-.hero h1{font-family:var(--serif);font-size:clamp(38px,6vw,68px);letter-spacing:-.065em;line-height:1.15;font-weight:650;margin:0}
-.hero p{color:#d2e2d7;max-width:650px;margin:16px 0 0;line-height:1.7}
-.hero .data-date{font-family:var(--mono);color:#b7d2c2;font-size:12px;margin-top:24px;letter-spacing:.045em}
-main{padding-bottom:52px}
-section[id],article[id],details[id]{scroll-margin-top:20px}
+.hero-body{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:20px;align-items:end;padding:17px 0 16px}
+.hero h1{grid-column:1;font-family:var(--serif);font-size:clamp(32px,4.1vw,53px);letter-spacing:-.045em;line-height:1.15;font-weight:650;margin:0}
+.hero p{grid-column:1;color:var(--muted);max-width:72ch;margin:6px 0 0;line-height:1.55;font-size:14px}
+.hero .data-date{grid-column:2;grid-row:1/span 2;font-variant-numeric:tabular-nums;font-size:12px;white-space:nowrap}
+main{padding:13px 0 52px}
+section[id],article[id],details[id],#nav-chart{scroll-margin-top:20px}
 h2,h3,p{margin:0}
-h2{font-family:var(--serif);font-size:31px;font-weight:650;letter-spacing:-.045em;line-height:1.25}
+h2{font-family:var(--serif);font-size:30px;font-weight:650;letter-spacing:-.035em;line-height:1.25}
 h3{font-size:17px;font-weight:650}
 .muted,.note{color:var(--muted)}
 .note{font-size:13px}
-.eyeline{display:block;color:var(--green);font-size:12px;font-weight:650;margin-bottom:3px}
-.control-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px 22px;padding:19px 0 15px}
-.control-bundle{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:flex-end}
-.control-set{display:flex;align-items:center;gap:3px;border:1px solid #ced9cd;background:#e8ede4;border-radius:9px;padding:3px}
-.control-set button{min-height:37px;background:transparent;color:var(--ink);border:0;border-radius:6px;padding:4px 11px;white-space:nowrap;font-size:13px}
-.control-set button[aria-pressed=true]{background:var(--forest);color:#fffef6;font-weight:600}
-.control-set button[aria-pressed=false]:hover{background:#dbe7db}
-.select-control{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:13px}
-.select-control select{border:1px solid #ced9cd;border-radius:8px;padding:8px 13px;background:var(--paper);color:var(--ink);min-height:45px}
+.dashboard-toolbar{padding:10px 13px;background:var(--paper);border:1px solid var(--line);border-radius:11px}
+.control-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px}
+.control-bundle{display:flex;flex-wrap:wrap;gap:6px 11px;align-items:center;min-width:0}
+.control-set{display:flex;align-items:center;gap:2px;border:1px solid var(--line);background:var(--soft);border-radius:8px;padding:3px;max-width:100%}
+.control-set button{min-height:34px;background:transparent;color:var(--ink);border:0;border-radius:5px;padding:4px 10px;white-space:nowrap;font-size:13px}
+.control-set button[aria-pressed=true]{background:var(--forest);color:#fffef6;font-weight:650}
+.control-set button[aria-pressed=false]:hover{background:#e0e8dc}
+.select-control{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:13px;max-width:100%}
+.select-control select{border:1px solid #cbd7cd;border-radius:7px;padding:4px 9px;background:var(--paper);color:var(--ink);min-height:36px;max-width:100%}
 [hidden]{display:none!important}
-.basis-guide{display:grid;gap:3px;margin:0 0 12px;font-size:13px;color:var(--muted)}
+.basis-guide{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;border-top:1px solid var(--line);padding-top:7px;margin-top:7px;font-size:12px;color:var(--muted)}
 .basis-guide strong{color:var(--ink);font-weight:650;margin-right:.35em}
-.scope-note{font-size:13px;color:var(--muted);margin:0 0 15px}
-.metric-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:12px}
-.metric-card{position:relative;padding:15px 18px;background:var(--paper);border:1px solid var(--line);border-radius:11px;min-width:0}
-.metric-card .series-name{font-weight:650;color:var(--series);font-size:15px}
-.metric-card .sub{font-size:12px;color:var(--muted);margin:2px 0 9px}
-.metric-card .value{font-size:clamp(26px,3.6vw,41px);line-height:1.1;letter-spacing:-.065em;font-weight:630;font-variant-numeric:tabular-nums}
-.metric-card .card-foot{display:flex;justify-content:space-between;gap:8px 14px;flex-wrap:wrap;margin-top:11px;color:var(--muted);font-size:12px}
+.scope-note{font-size:12px;color:var(--muted);margin-top:5px;font-variant-numeric:tabular-nums}
+.metric-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:9px 0;border:1px solid var(--line);border-radius:11px;background:var(--paper);overflow:hidden}
+.metric-card{padding:8px 14px;min-width:0;border-top:2px solid var(--series)}
+.metric-card + .metric-card{border-inline-start:1px solid var(--line)}
+.metric-card .series-name{font-weight:650;color:var(--series);font-size:14px}
+.metric-card .sub{font-size:12px;color:var(--muted);margin:0 0 5px}
+.metric-card .value{font-size:clamp(27px,3.1vw,39px);line-height:1.06;letter-spacing:-.045em;font-weight:650;font-variant-numeric:tabular-nums}
+.metric-card .card-foot{display:flex;justify-content:space-between;gap:1px 10px;flex-wrap:wrap;margin-top:5px;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
 .metric-card .card-foot strong{color:var(--ink);font-weight:620}
-.panel{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:21px 23px}
-.chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
-.chart-head h2{font-size:25px}
-.chart-actions{display:flex;flex-wrap:wrap;gap:8px}
-.chart-actions .control-set{background:var(--bg);border-color:var(--line)}
-.chart-actions .control-set button{min-height:33px;padding-inline:9px}
-.chart-actions .select-control select{min-height:38px;padding:4px 7px}
-.chart-legend{display:flex;gap:10px 19px;flex-wrap:wrap;margin-top:13px;color:var(--muted);font-size:12px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:18px 20px;min-width:0}
+#nav-chart{padding:10px 13px 11px}
+.chart-head{display:flex;justify-content:space-between;align-items:center;gap:8px 14px;flex-wrap:wrap}
+.chart-head h2{font-size:23px}
+.chart-actions{display:flex;flex-wrap:wrap;align-items:center;gap:5px 7px;min-width:0}
+.chart-actions .control-set button{min-height:30px;padding-inline:8px}
+.chart-actions .select-control select{min-height:34px}
+.chart-legend{display:flex;gap:5px 17px;flex-wrap:wrap;margin-top:7px;color:var(--muted);font-size:12px}
 .legend-item,.readout-item{display:inline-flex;align-items:center;gap:7px}
 .key{display:inline-block;width:15px;height:3px;background:var(--series);border-radius:2px}
 .key-dashed{height:0;border-top:2px dashed var(--series);background:transparent}
@@ -84,15 +88,15 @@ h3{font-size:17px;font-weight:650}
 .key-dot,.key-diamond{width:8px;height:8px;flex:none}
 .key-dot{border-radius:50%}
 .key-diamond{width:7px;height:7px;border-radius:0;border:1.5px solid var(--series);background:transparent;transform:rotate(45deg)}
-.chart-area{margin-top:5px;height:clamp(280px,40vw,416px)}
+.chart-area{margin-top:2px;height:clamp(280px,38vw,422px)}
 canvas{display:block;width:100%;height:100%;outline-offset:1px;border-radius:4px;touch-action:pan-y}
-.readout{min-height:36px;display:flex;align-items:baseline;gap:6px 16px;flex-wrap:wrap;padding:8px 0 3px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.readout{min-height:34px;display:flex;align-items:baseline;gap:4px 15px;flex-wrap:wrap;padding:7px 9px;background:var(--soft);border-radius:6px;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .readout strong{color:var(--ink)}
 .trade-readout{flex-basis:100%;display:flex;flex-wrap:wrap;gap:3px 16px;padding-top:3px}
 .trade-capture{flex-basis:100%;color:var(--ink)}
-.graph-note{font-size:12px;color:var(--muted);margin-top:2px}
-.section{margin-top:42px}
-.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.graph-note{font-size:12px;color:var(--muted);margin-top:5px}
+.section{margin-top:34px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:8px 12px;flex-wrap:wrap;margin-bottom:11px;padding-bottom:7px;border-bottom:1px solid var(--line)}
 .section-head p{font-size:13px;max-width:440px;color:var(--muted)}
 .risk-layout{display:grid;grid-template-columns:1.13fr 1fr;gap:13px}
 .discount-layout{display:grid;grid-template-columns:1.35fr 1fr;gap:13px}
@@ -104,13 +108,15 @@ canvas{display:block;width:100%;height:100%;outline-offset:1px;border-radius:4px
 .primer{display:grid;gap:12px;margin-top:12px}
 .primer div:not(:last-child){padding-bottom:11px;border-bottom:1px solid var(--line)}
 .primer p{font-size:13px;color:var(--muted);margin-top:3px}
-.table-wrap{margin-top:10px}
+.table-wrap{margin-top:8px;max-width:100%;overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:13px}
-th,td{padding:8px 6px;text-align:right;border-bottom:1px solid var(--line);vertical-align:middle}
+th,td{padding:8px 7px;text-align:right;border-bottom:1px solid var(--line);vertical-align:middle}
 th:first-child,td:first-child{text-align:left;padding-left:0}
 th:last-child,td:last-child{padding-right:0}
-thead th{color:var(--muted);font-size:12px;line-height:1.24;font-weight:650}
+thead th{color:var(--muted);font-size:12px;line-height:1.3;font-weight:650;border-bottom-color:#c2d0c3}
 tbody th{font-weight:500}
+tbody tr:nth-child(even){background:#f7f8f3}
+tbody tr:hover{background:var(--soft)}
 tbody tr:last-child>*{border-bottom:0}
 .series-col{color:var(--series)}
 .neg{color:var(--red)}
@@ -123,7 +129,7 @@ tbody tr:last-child>*{border-bottom:0}
 .mini-track::before{content:"";position:absolute;inset:0 auto 0 50%;border-left:1px solid #a0aa9e}
 .mini-fill{position:absolute;top:0;height:100%;border-radius:2px;background:var(--series)}
 .read-note{border-left:3px solid var(--green);padding:9px 14px;background:#eaf0e6;border-radius:0 7px 7px 0;margin-top:13px;font-size:13px}
-.execution-note{border-color:#9b572a;background:#f4ebe0;margin-top:16px}
+.execution-note{border-color:#9b572a;background:#f5eee4;margin-top:8px;padding-block:6px;font-size:12px}
 .execution-note strong{color:#824316}
 .evaluation-table td{white-space:normal}
 .execution-source{margin-top:10px}
@@ -141,10 +147,15 @@ tbody tr:last-child>*{border-bottom:0}
 .pos-grid dt{font-size:12px;color:var(--muted)}
 .pos-grid dd{margin:3px 0 0;font-size:18px;font-weight:650;line-height:1.4}
 details{margin-top:13px}
-summary{cursor:pointer;font-weight:600}
-.roll-box{max-height:306px;overflow:auto;margin-top:10px;scrollbar-gutter:stable}
+summary{cursor:pointer;font-weight:650;color:var(--forest)}
+.roll-box{max-height:306px;overflow:auto;margin-top:10px;scrollbar-gutter:stable;isolation:isolate}
 .roll-box th,.roll-box td{white-space:nowrap}
-.roll-box thead th{position:sticky;top:0;background:var(--paper)}
+.roll-box thead th{position:sticky;top:0;z-index:2;background:var(--soft)}
+.roll-box tr>*:first-child{position:sticky;left:0;padding-inline:7px;box-shadow:1px 0 0 var(--line)}
+.roll-box thead tr>*:first-child{z-index:3}
+.roll-box tbody tr>*:first-child{z-index:1;background:var(--paper)}
+.roll-box tbody tr:nth-child(even)>*:first-child{background:#f7f8f3}
+.roll-box tbody tr:hover>*:first-child{background:var(--soft)}
 .verify-grid{display:grid;grid-template-columns:1.12fr 1fr;gap:13px}
 .audit-note{font-size:13px;line-height:1.7;margin-top:11px;color:var(--muted)}
 .checks{padding-left:1.1rem;margin:9px 0 0;font-size:13px}
@@ -157,48 +168,53 @@ summary{cursor:pointer;font-weight:600}
 .download:hover{background:var(--pale)}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
-footer{background:#e9ede5;color:var(--muted);padding:17px 0;font-size:12px}
+footer{background:var(--soft);color:var(--muted);padding:14px 0;font-size:12px;border-top:1px solid var(--line)}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px}
 @media(max-width:860px){
   .wrap{width:calc(100% - 36px)}
   .risk-layout,.verify-grid,.attribution,.discount-layout{grid-template-columns:1fr}
-  .hero-body{padding-block:35px}
+  .hero-body{grid-template-columns:1fr}
+  .hero .data-date{grid-column:1;grid-row:auto;margin-top:6px}
 }
 @media(max-width:550px){
-  .wrap{width:calc(100% - 25px)}
-  .mast{padding-block:11px}
+  .wrap{width:calc(100% - 24px)}
+  .mast{min-height:40px}
   .mast strong{font-size:12px}
   .mast nav{gap:10px}
-  .mast a{font-size:11px}
-  .hero-body{padding-block:29px 24px}
-  .hero h1{font-size:36px}
-  .hero p{font-size:13px;margin-top:10px}
-  .hero .data-date{margin-top:14px}
-  .control-bar{padding-block:14px;gap:9px}
-  .control-bundle{gap:8px}
-  .control-set button{min-height:37px;padding-inline:7px;font-size:12px}
-  .select-control select{min-height:42px;padding-inline:8px}
-  .metric-cards{gap:5px}
-  .metric-card{padding:9px 6px}
-  .metric-card .series-name{font-size:11px}
-  .metric-card .sub{min-height:32px;font-size:10px}
-  .metric-card .value{font-size:23px}
-  .metric-card .card-foot{gap:1px 5px;font-size:10px;margin-top:6px}
-  .panel{padding:13px 11px}
-  .chart-head h2,h2{font-size:23px}
+  .mast a{font-size:12px}
+  .hero-body{padding-block:11px 10px}
+  .hero h1{font-size:29px}
+  .hero p{font-size:13px;margin-top:4px}
+  .hero .data-date{font-size:11px;margin-top:5px}
+  main{padding-top:8px}
+  .dashboard-toolbar{padding:8px 9px}
+  .control-bar,.control-bundle{gap:6px}
+  .control-set button{min-height:34px;padding-inline:7px;font-size:12px}
+  .select-control select{min-height:35px;padding-inline:7px}
+  .basis-guide{grid-template-columns:1fr;gap:4px}
+  .metric-card{padding:6px 7px}
+  .metric-card .series-name{font-size:12px}
+  .metric-card .sub{min-height:2.75em;font-size:11px;line-height:1.35}
+  .metric-card .value{font-size:clamp(22px,5.7vw,27px)}
+  .metric-card .card-foot{gap:0 5px;font-size:11px;margin-top:4px}
+  .panel,#nav-chart{padding:10px}
+  .chart-head h2,h2{font-size:22px}
   .chart-head{gap:6px}
   .chart-actions .control-set button{min-height:32px;font-size:11px}
-  .chart-legend{gap:5px 10px;margin-top:9px;font-size:11px}
-  .chart-area{height:275px}
-  .section{margin-top:29px}
+  .chart-legend{gap:4px 10px;margin-top:6px;font-size:11px}
+  .chart-area{height:270px}
+  .section{margin-top:26px}
   table{font-size:11px}
   th,td{padding-inline:3px}
   thead th{font-size:11px}
   .year-return{font-size:11px}
   .method-grid{grid-template-columns:1fr}
 }
+@media(pointer:coarse){
+  .control-set button,.chart-actions .control-set button,.select-control select,.chart-actions .select-control select,.download{min-height:40px}
+}
 @media print{
-  .wrap{width:100%}.hero{background:white;color:#173128}.hero p,.hero .data-date,.mast strong{color:#34483f}
+  .wrap{width:100%}.hero,.hero-nav{background:white;color:#173128}.hero p,.hero .data-date,.mast strong{color:#34483f}
   .mast nav,.control-bar,.chart-actions,.download,footer{display:none}
   .hero-body{padding-block:16px}.section{margin-top:18px}.panel{break-inside:avoid}
 }
@@ -206,8 +222,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 1
 </head>
 <body>
 <header class="hero" id="top">
-  <div class="wrap">
-    <div class="mast">
+  <div class="hero-nav">
+    <div class="wrap mast">
       <strong>策略研究</strong>
       <nav aria-label="报告章节">
         <a href="#method">策略怎么做</a>
@@ -215,40 +231,42 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 1
         <a href="#limitations">局限性</a>
       </nav>
     </div>
-    <div class="hero-body">
-      <h1>滚动 IC 与两大指数</h1>
-      <p>连续持有中证 500 股指期货，合约快到期时换到下个月。看它怎样赚钱，以及和直接持有中证 500、纳斯达克相比表现如何。</p>
-      <p class="data-date">中国行情更新至 2026-11-18 收盘</p>
-    </div>
+  </div>
+  <div class="wrap hero-body">
+    <h1>滚动 IC 与两大指数</h1>
+    <p>连续持有中证 500 股指期货，合约快到期时换到下个月。看它怎样赚钱，以及和直接持有中证 500、纳斯达克相比表现如何。</p>
+    <p class="data-date">中国行情更新至 2026-11-18 收盘</p>
   </div>
 </header>
 <main class="wrap">
-  <p class="read-note execution-note" id="review-alert"></p>
   <section aria-label="回测区间和基准">
-    <div class="control-bar">
-      <div class="control-bundle">
-        <div class="control-set" id="period-controls" role="group" aria-label="回测区间">
-          <button type="button" data-period="post" aria-pressed="true">原帖区间</button>
-          <button type="button" data-period="five" aria-pressed="false">近 5 年</button>
-          <button type="button" data-period="three" aria-pressed="false">近 3 年</button>
+    <div class="dashboard-toolbar">
+      <div class="control-bar">
+        <div class="control-bundle">
+          <div class="control-set" id="period-controls" role="group" aria-label="回测区间">
+            <button type="button" data-period="post" aria-pressed="true">原帖区间</button>
+            <button type="button" data-period="five" aria-pressed="false">近 5 年</button>
+            <button type="button" data-period="three" aria-pressed="false">近 3 年</button>
+          </div>
+          <div class="control-set" id="basis-controls" role="group" aria-label="指数比较口径" aria-describedby="basis-guide">
+            <button type="button" data-basis="fair" aria-pressed="true">统一人民币 · 含股息</button>
+            <button type="button" data-basis="original" aria-pressed="false">原帖口径 · 只看价格</button>
+          </div>
         </div>
-        <div class="control-set" id="basis-controls" role="group" aria-label="指数比较口径" aria-describedby="basis-guide">
-          <button type="button" data-basis="fair" aria-pressed="true">统一人民币 · 含股息</button>
-          <button type="button" data-basis="original" aria-pressed="false">原帖口径 · 只看价格</button>
-        </div>
+        <label class="select-control" id="nas-field">纳指基准
+          <select id="nasdaq">
+            <option value="compTR">纳斯达克综合</option>
+            <option value="ndxTR">纳斯达克 100</option>
+          </select>
+        </label>
       </div>
-      <label class="select-control" id="nas-field">纳指基准
-        <select id="nasdaq">
-          <option value="compTR">纳斯达克综合</option>
-          <option value="ndxTR">纳斯达克 100</option>
-        </select>
-      </label>
+      <div class="basis-guide" id="basis-guide">
+        <p><strong>统一人民币 · 含股息</strong> 中证 500 和纳指都把股息算作再投资，纳指再按汇率折成人民币。</p>
+        <p><strong>原帖口径 · 只看价格</strong> 中证 500 看人民币价格，纳斯达克综合看美元价格，均不计股息。</p>
+      </div>
+      <p class="scope-note" id="scope-note" aria-live="polite"></p>
     </div>
-    <div class="basis-guide" id="basis-guide">
-      <p><strong>统一人民币 · 含股息</strong> 中证 500 和纳指都把股息算作再投资，纳指再按汇率折成人民币。</p>
-      <p><strong>原帖口径 · 只看价格</strong> 中证 500 看人民币价格，纳斯达克综合看美元价格，均不计股息。</p>
-    </div>
-    <p class="scope-note" id="scope-note" aria-live="polite"></p>
+    <p class="read-note execution-note" id="review-alert"></p>
     <div class="metric-cards" id="cards"></div>
     <div class="panel" id="nav-chart">
       <div class="chart-head">
@@ -282,6 +300,30 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 1
       <p class="graph-note" id="chart-note"></p>
       <p class="graph-note" id="discount-note" hidden><span id="discount-chart-description"></span> <a href="#roll-details">查看逐笔记录</a> · <a href="#discount-history">查看年化公式和各年贴水</a></p>
     </div>
+  </section>
+
+  <section class="section" id="performance">
+    <div class="section-head">
+      <h2>收益与风险</h2>
+      <button class="download" id="download" type="button">下载当前曲线 CSV</button>
+    </div>
+    <div class="risk-layout">
+      <article class="panel">
+        <h3>收益质量与回撤</h3>
+        <div class="table-wrap"><table id="risk-table"></table></div>
+      </article>
+      <article class="panel">
+        <h3>逐年收益</h3>
+        <div class="table-wrap"><table id="annual-table"></table></div>
+        <p class="note" id="annual-note">＊区间首尾为部分年度。以各年度末的可用估值比较。</p>
+      </article>
+    </div>
+    <p class="read-note" id="comparison-text"></p>
+    <article class="panel range-panel">
+      <h3>三段回测一览</h3>
+      <div class="table-wrap"><table id="range-table"></table></div>
+      <p class="note">每格依次为年化收益、最大回撤，随上方比较口径更新。</p>
+    </article>
   </section>
 
   <section class="section" id="discount-history">
@@ -379,30 +421,6 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 1
         <p class="note links execution-source"><a href="http://www.cffex.com.cn/u/cms/www/202501/071747590uho.pdf">中金所结算细则</a> · <a href="http://www.cffex.com.cn/sj/jycs/202611/18/index.xml">交易参数样例</a> · <a href="http://www.cffex.com.cn/sj/jscs/202610/19/20261019_1.csv">结算参数样例</a></p>
       </article>
     </div>
-  </section>
-
-  <section class="section" id="performance">
-    <div class="section-head">
-      <h2>收益与风险</h2>
-      <button class="download" id="download" type="button">下载当前曲线 CSV</button>
-    </div>
-    <div class="risk-layout">
-      <article class="panel">
-        <h3>收益质量与回撤</h3>
-        <div class="table-wrap"><table id="risk-table"></table></div>
-      </article>
-      <article class="panel">
-        <h3>逐年收益</h3>
-        <div class="table-wrap"><table id="annual-table"></table></div>
-        <p class="note" id="annual-note">＊区间首尾为部分年度。以各年度末的可用估值比较。</p>
-      </article>
-    </div>
-    <p class="read-note" id="comparison-text"></p>
-    <article class="panel range-panel">
-      <h3>三段回测一览</h3>
-      <div class="table-wrap"><table id="range-table"></table></div>
-      <p class="note">每格依次为年化收益、最大回撤，随上方比较口径更新。</p>
-    </article>
   </section>
 
   <section class="section" id="position">
